@@ -8,12 +8,18 @@
 import scrapy
 
 
-class GuardianItem(scrapy.Item):
+class NSEItem(scrapy.Item):
     # define the fields for your news relevant information
-    category     = scrapy.Field()
-    section      = scrapy.Field()
-    headline     = scrapy.Field()
-    url          = scrapy.Field()
-    summary      = scrapy.Field()
-    media        = scrapy.Field()
-    datescrapped = scrapy.Field()
+    symbol          =   scrapy.Field()
+    open            =   scrapy.Field()
+    high            =   scrapy.Field()
+    low             =   scrapy.Field()
+    ltp             =   scrapy.Field()
+    chng            =   scrapy.Field()
+    pcnt_chng       =   scrapy.Field()
+    volume          =   scrapy.Field()
+    turnover        =   scrapy.Field()
+    ftwh            =   scrapy.Field()
+    ftwl            =   scrapy.Field()
+    tsfd_pcnt_chng  =   scrapy.Field()
+    td_pcnt_chng    =   scrapy.Field()

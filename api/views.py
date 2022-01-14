@@ -7,39 +7,41 @@ from rest_framework_mongoengine import viewsets
 from rest_framework.filters import SearchFilter
 
 from feed.serializer import FeedSerializer
-from feed.models import News
+from feed.models import NiftyFifty
 
 
-class NewsViewSet(viewsets.ReadOnlyModelViewSet):
+class NiftyFiftyViewSet(viewsets.ReadOnlyModelViewSet):
     '''
-    Contains scraped data from leading news portal.
-    Q parameter is used to search for specific news information, will scan the mongodb 
-    base on the parameter value stated on the url e.g. http://127.0.0.1/api/news/?q=Russia
-    Lookup fields are headline, section, and news summary.
+    Contains scraped data from NSE India.
+    e.g. http://127.0.0.1:8000/api/nse/?q=TATA&c=symbol,high&o=+high
+    Q parameter is used to search for specific stocks,
+    C parameter is comma separated(optional) columns whose value to be shown
+    O parameter is + ascending / - descending and column name for ordering
+    Based on the parameter values stated on the url will scan the mongodb table
     '''
     lookup_field = 'id'
     serializer_class = FeedSerializer
     filter_backends = [SearchFilter]
-    search_fields = ['headline', 'section', 'summary']
+    columns = ['__all__']
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned list of scrapped news,
-        filtering result against a `q`(search_keyword) query parameter in the URL.
 
-        Improvement: use django-haystack and elasticsearch for optimum search functionality
-        """
-        queryset = News.objects.all()
+        queryset = NiftyFifty.objects.all()
         search_keyword = self.request.query_params.get('q', None)
+        self.columns = self.request.query_params.get('c', '__all__').split(',')
+        order = self.request.query_params.get('o', None)
         if search_keyword:
             queryset = queryset.filter(
-                Q(headline__icontains=search_keyword) | 
-                Q(section__icontains=search_keyword) | 
-                Q(summary__icontains=search_keyword))
+                Q(symbol__icontains=search_keyword))
+        if self.columns:
+            queryset = queryset.only(*self.columns)
+        if order:
+            queryset = queryset.order_by(order)
 
         return queryset
 
     def list(self, request, *args, **kwargs):
         search_page = self.get_queryset()
         serializer = self.get_serializer(search_page, many=True)
+        # serializer.Meta.fields = self.columns
         return Response(serializer.data)

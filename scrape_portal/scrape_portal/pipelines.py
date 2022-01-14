@@ -16,7 +16,7 @@ connect(MONGO_DATABASE)
 
 class ScrapePortalPipeline(object):
 
-    collection_name = 'news'
+    collection_name = 'niftyfifty'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri

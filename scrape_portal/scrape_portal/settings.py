@@ -37,7 +37,7 @@ ITEM_PIPELINES = {
     'scrape_portal.pipelines.ScrapePortalPipeline': 300,
 }
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'news'
+MONGO_DATABASE = 'niftyfifty'
 
 
 # Configure a delay for requests for the same website (default: 0)

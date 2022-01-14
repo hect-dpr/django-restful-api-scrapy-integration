@@ -3,11 +3,20 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from mongoengine import *
 
 
-class News(Document):
-    category     = StringField(required=False)
-    summary      = StringField(required=False)
-    media        = StringField(required=False)
-    section      = StringField(required=False)
-    url          = StringField(required=False)
-    headline     = StringField(required=False)
-    datescrapped = StringField(required=False)
+class NiftyFifty(Document):
+
+    meta            =   {'collection': 'niftyfifty'}
+
+    symbol          =   StringField(required=False)
+    open            =   StringField(required=False)
+    high            =   StringField(required=False)
+    low             =   StringField(required=False)
+    ltp             =   StringField(required=False)
+    chng            =   StringField(required=False)
+    pcnt_chng       =   StringField(required=False)
+    volume          =   StringField(required=False)
+    turnover        =   StringField(required=False)
+    ftwh            =   StringField(required=False)
+    ftwl            =   StringField(required=False)
+    tsfd_pcnt_chng  =   StringField(required=False)
+    td_pcnt_chng    =   StringField(required=False)

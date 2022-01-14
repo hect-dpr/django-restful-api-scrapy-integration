@@ -1,51 +1,61 @@
 {% load static %}
 <html>
+
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
+
 <body>
 
 	<div class="row">
-		
+
 		<div class="column smallport-24 medium-expand">
-			
-			<h3><p>Search result for: {{keyword}}</p></h3>
-			
+
+			<h3>
+				<p>Search result for: {{keyword}}</p>
+			</h3>
+
 			<div class="news-list infinite-scroll-container row">
 				{% for news in search_result %}
-					{% if news.media %}
-					<div class="infinite-scroll-item smallport-24 small-12 medium-6 columns">
-						<div class="news-card">
-							<div class="news">
-								<a href="{{ news.url }}"><img src="{% if news.media %}{{news.media}} {% else %} {% static 'img/no_image.png' %} {% endif %}" alt="{{news.section}}"></a>
-							</div>
-							
-							<div class="news-details">
-								<p class="news">
-									<small>{{news.headline|default:"&nbsp;"}}</small>
-								</p>
-							</div>
-							<div class="row align-left collapse call-to-actions">
-								<small>{{news.section|default:"&nbsp;"}}</small>
-								<div class="small-4 columns shrink">
-									<span class="show-for-small">{{ news.summary|default:"&nbsp;"}}</span>
-								</div>
-							</div>
+				<div class="infinite-scroll-item smallport-24 small-12 medium-6 columns">
+					<div class="news-card">
+						<div class="news">
+							<a href="#"></a>
 						</div>
+
+						<div class="news-details">
+							<p class="news">
+								<small>{{news.symbol|default:"&nbsp;"}}</small>
+							</p>
+						</div>
+						{% if news.symbol %}<div>Symbol: {{news.symbol|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.open %}<div>Open: {{news.open|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.high %}<div>High: {{news.high|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.low %}<div>Low: {{news.low|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.ltp %}<div>Last Traded Price: {{news.ltp|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.chng %}<div>Change: {{news.chng|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.pcnt_chng %}<div>% Change: {{news.pcnt_chng|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.volume %}<div>Traded Volume: {{news.volume|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.turnover %}<div>52 Week High: {{news.turnover|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.ftwh %}<div>52 Week Low: {{news.ftwh|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.ftwl %}<div>Past 365 Days: {{news.ftwl|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.tsfd_pcnt_chng %}<div>365 Days % Change: {{news.tsfd_pcnt_chng|default:"&nbsp;"}}</div>{% endif %}
+						{% if news.td_pcnt_chng %}<div>Past 30 Days: {{news.td_pcnt_chng|default:"&nbsp;"}}</div>{% endif %}
 					</div>
-					{% endif %}
+			</div>
 				{% endfor %}
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
-        window.csrf_token = '{{ csrf_token }}';
-        window.home = "{% url 'home' %}";
-    </script>
+		window.csrf_token = '{{ csrf_token }}';
+		window.home = "{% url 'home' %}";
+	</script>
 	<script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 
 </body>
+
 </html>

@@ -2,19 +2,17 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import django_filters
 
-from feed.models import News
+from feed.models import NiftyFifty
 
 
-class NewsFilter(django_filters.FilterSet):
+class NiftyFiftyFilter(django_filters.FilterSet):
     # headline = django_filters.CharFilter(lookup_expr='icontains')
     # section = django_filters.CharFilter(lookup_expr='icontains')
     # summary = django_filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
-        model = News
+        model = NiftyFifty
         # fields = ['headline', 'section', 'summary', ]
         fields = {
-            'headline': ['icontains', ],
-            'section': ['icontains', ],
-            'summary': ['icontains', ],
+            'symbol': ['icontains', ],
         }

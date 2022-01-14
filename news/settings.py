@@ -91,13 +91,13 @@ DATABASES = {
 SESSION_ENGINE = 'mongoengine.django.sessions'
 
 # MONGODB Setup
-DBNAME = 'news'
-MONGODB_USER = 'admin'
-MONGODB_PASSWD = 'admin'
-MONGODB_HOST = 'localhost'
-MONGODB_NAME = 'news'
-MONGODB_DATABASE_HOST = 'mongodb://{}:{}@{}/{}'.format(
-    MONGODB_USER, MONGODB_PASSWD, MONGODB_HOST, MONGODB_NAME)
+DBNAME = 'niftyfifty'
+MONGODB_USER = ''
+MONGODB_PASSWD = ''
+MONGODB_HOST = '127.0.0.1:27017'
+MONGODB_NAME = 'niftyfifty'
+MONGODB_DATABASE_HOST = 'mongodb://{}'.format(
+    MONGODB_HOST, MONGODB_NAME)
 
 mongoengine.connect(DBNAME, host=MONGODB_DATABASE_HOST)
 

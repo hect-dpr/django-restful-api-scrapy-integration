@@ -10,7 +10,7 @@
 		
 		<div class="column smallport-24 medium-expand">
 			
-			<h3><p>News Portal</p></h3>
+			<h3><p>NiftyFifty Portal</p></h3>
 			
 			<div>
 				<input name="keyword" id="id_keyword" type="text" class="medium-6" placeholder="Search&#42;"/>
@@ -18,27 +18,32 @@
 			</div>
 			<div class="news-list infinite-scroll-container row">
 				{% for news in news_listings %}
-					{% if news.media %}
 					<div class="infinite-scroll-item smallport-24 small-12 medium-6 columns">
 						<div class="news-card">
 							<div class="news">
-								<a href="{{ news.url }}"><img src="{% if news.media %}{{news.media}} {% else %} {% static 'img/no_image.png' %} {% endif %}" alt="{{news.section}}"></a>
+								<a href="#"></a>
 							</div>
 							
 							<div class="news-details">
 								<p class="news">
-									<small>{{news.headline|default:"&nbsp;"}}</small>
+									<small>{{news.symbol|default:"&nbsp;"}}</small>
 								</p>
 							</div>
-							<div class="row align-left collapse call-to-actions">
-								<small>{{news.section|default:"&nbsp;"}}</small>
-								<div class="small-4 columns shrink">
-									<span class="show-for-small">{{ news.summary|default:"&nbsp;"}}</span>
-								</div>
-							</div>
+							{% if news.symbol %}<div>Symbol: {{news.symbol|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.open %}<div>Open: {{news.open|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.high %}<div>High: {{news.high|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.low %}<div>Low: {{news.low|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.ltp %}<div>Last Traded Price: {{news.ltp|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.chng %}<div>Change: {{news.chng|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.pcnt_chng %}<div>% Change: {{news.pcnt_chng|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.volume %}<div>Traded Volume: {{news.volume|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.turnover %}<div>52 Week High: {{news.turnover|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.ftwh %}<div>52 Week Low: {{news.ftwh|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.ftwl %}<div>Past 365 Days: {{news.ftwl|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.tsfd_pcnt_chng %}<div>365 Days % Change: {{news.tsfd_pcnt_chng|default:"&nbsp;"}}</div>{% endif %}
+							{% if news.td_pcnt_chng %}<div>Past 30 Days: {{news.td_pcnt_chng|default:"&nbsp;"}}</div>{% endif %}
 						</div>
 					</div>
-					{% endif %}
 				{% endfor %}
 			</div>
 		</div>
