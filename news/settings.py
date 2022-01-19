@@ -90,6 +90,8 @@ DATABASES = {
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
 
+TEST_RUNNER = 'api.tests.NoSQLTestRunner'
+
 # MONGODB Setup
 DBNAME = 'niftyfifty'
 MONGODB_USER = ''
